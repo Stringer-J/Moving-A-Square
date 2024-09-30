@@ -28,6 +28,9 @@ html, body {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+    border-left: solid white 3px;
+    border-right: solid white 3px;
+    border-bottom: solid white 3px;
 }
 
 .appBoxHeader {
@@ -61,7 +64,7 @@ html, body {
     /* background-color: red; */
     width: 20%;
     height: 100%;
-    border-right: solid black 3px;
+    /* border-right: solid black 3px; */
     display: flex;
     flex-direction: column;
 }
@@ -100,4 +103,5 @@ html, body {
 .inactiveButtonInfo:hover, .inactiveButtonSquare:hover {
     color: white;
     background-color: black;
+    border: solid black;
 }
