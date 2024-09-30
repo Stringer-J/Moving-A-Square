@@ -48,7 +48,7 @@ function SquareCom() {
                 return;
         }
 
-        const id = setInterval(() => moveSquare(dx, dy), 50);
+        const id = setInterval(() => moveSquare(dx, dy), 25);
         setIntervalId(id);
     }, [intervalId]);
 
