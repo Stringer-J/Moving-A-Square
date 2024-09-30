@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import pixelSquare from './assets/PixelSquare.png';
 import pixelBook from './assets/PixelBook.png';
+import StartCom from './components/StartCom/StartCom.jsx';
 import InfoCom from './components/InfoCom/InfoCom.jsx';
 import SquareCom from './components/SquareCom/SquareCom.jsx';
 
@@ -28,7 +29,7 @@ function App() {
       case 'SquareCom':
         return <SquareCom />;
       default:
-        return null;
+        return <StartCom />;
     }
   };
 
