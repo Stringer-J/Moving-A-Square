@@ -4,7 +4,9 @@ function InfoCom() {
     return (
         <>
             <div className='infoBox'>
-                INFO COM IS HERE
+                <div className='insideInfoBox'>
+                    
+                </div>
             </div>
         </>
     )

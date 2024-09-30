@@ -3,8 +3,10 @@ import './SquareCom.css';
 function SquareCom() {
     return (
         <>
-            <div className='infoBox'>
-                SQUARE COM IS HERE
+            <div className='squareBox'>
+                <div className='insideSquareBox'>
+
+                </div>
             </div>
         </>
     )
