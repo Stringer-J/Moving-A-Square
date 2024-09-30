@@ -3,29 +3,74 @@ import './SquareCom.css';
 import pixelSquare from '../../assets/PixelSquare.png';
 
 function SquareCom() {
-    const [squarePosition, setSquarePosition] = useState(0);
+    const [squareHPosition, setSquareHPosition] = useState(0);
+    const [squareVPosition, setSquareVPosition] = useState(0);
+    const [intervalId, setIntervalId] = useState(null);
 
-    const handleKeyPress = useCallback((e) => {
-        const squareImg = document.getElementById('moveSquare');
-        const squareContainer = document.querySelector('.insideSquareBox');
+    const moveSquare = (dx, dy) => {
+        setSquareHPosition((prevPosition) => {
+            const newPosition = prevPosition + dx;
+            const squareWidth = document.getElementById('moveSquare').offsetWidth;
+            const containerWidth = document.querySelector('.insideSquareBox').offsetWidth;
 
-        if (e.key === 'ArrowRight') {
-            const squareImgWidth = squareImg.offsetWidth;
-            const squareContainerWidth = squareContainer.offsetWidth;
+            return (newPosition + squareWidth <= containerWidth && newPosition >= 0) ? newPosition : prevPosition;
+        });
 
-            if (squarePosition + squareImgWidth + 10 <= squareContainerWidth) {
-                setSquarePosition((prevPosition) => prevPosition + 10)
-            } 
+        setSquareVPosition((prevPosition) => {
+            const newPosition = prevPosition + dy;
+            const squareHeight = document.getElementById('moveSquare').offsetHeight;
+            const containerHeight = document.querySelector('.insideSquareBox').offsetHeight;
+
+            return (newPosition + squareHeight <= containerHeight && newPosition >= 0) ? newPosition : prevPosition;
+        });
+    };
+
+    const handleKeyDown = useCallback((e) => {
+        if (intervalId) return;
+
+        let dx = 0;
+        let dy = 0;
+
+        switch (e.key) {
+            case 'ArrowRight':
+                dx = 10;
+                break;
+            case 'ArrowLeft':
+                dx = -10;
+                break;
+            case 'ArrowUp':
+                dy = -10;
+                break;
+            case 'ArrowDown':
+                dy = 10;
+                break;
+            default:
+                return;
         }
-    }, [squarePosition]);
+
+        const id = setInterval(() => moveSquare(dx, dy), 50);
+        setIntervalId(id);
+    }, [intervalId]);
+
+    const handleKeyUp = useCallback(() => {
+        if (intervalId) {
+            clearInterval(intervalId);
+            setIntervalId(null);
+        }
+    }, [intervalId]);
 
     useEffect(() => {
-        window.addEventListener('keydown', handleKeyPress);
+        window.addEventListener('keydown', handleKeyDown);
+        window.addEventListener('keyup', handleKeyUp);
 
         return () => {
-            window.removeEventListener('keydown', handleKeyPress);
+            window.removeEventListener('keydown', handleKeyDown);
+            window.removeEventListener('keyup', handleKeyUp);
+            if (intervalId) {
+                clearInterval(intervalId);
+            }
         };
-    }, [handleKeyPress]);
+    }, [handleKeyDown, handleKeyUp, intervalId]);
 
     return (
         <>
@@ -34,8 +79,8 @@ function SquareCom() {
                     <img id='moveSquare'
                          src={pixelSquare}
                          alt='Pixel Square'
-                         style={{ transform: `translateX(${squarePosition}px)`,
-                                  transition: 'transform 0.1s ease' }} />
+                         style={{ transform: `translate(${squareHPosition}px, ${squareVPosition}px)`,
+                                  transition: 'transform 0.1s ease'}} />
                 </div>
             </div>
         </>
