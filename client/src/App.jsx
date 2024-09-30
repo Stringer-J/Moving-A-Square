@@ -12,6 +12,15 @@ function App() {
     setSelectedFromSideBar(component);
   };
 
+  const getButtonClass = (componentName) => {
+    switch (componentName) {
+      case 'InfoCom':
+        return selectedFromSideBar === 'InfoCom' ? 'activeButtonInfo' : 'inactiveButtonInfo';
+      case 'SquareCom':
+        return selectedFromSideBar === 'SquareCom' ? 'activeButtonSquare' : 'inactiveButtonSquare';
+    }
+  };
+
   const renderSideBarComponent = () => {
     switch (selectedFromSideBar) {
       case 'InfoCom':
@@ -33,12 +42,12 @@ function App() {
         </div>
         <div className='appBoxBody'>
           <div className='sideBar'>
-            <button className='inactiveButtonInfo tiny5-regular'
+            <button className={`${getButtonClass('InfoCom')} tiny5-regular`}
                     onClick={() => handleSideBarClick('InfoCom')}>
               INFO
               <img src={pixelBook} alt='Pixel Book' />
             </button>
-            <button className='inactiveButtonSquare tiny5-regular'
+            <button className={`${getButtonClass('SquareCom')} tiny5-regular`}
                     onClick={() => handleSideBarClick('SquareCom')}>
               SQUARE
               <img src={pixelSquare} alt='Pixel Square' />
