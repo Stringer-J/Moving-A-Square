@@ -68,13 +68,16 @@ function SquareCom() {
         const containerWidth = container.offsetWidth;
         const containerHeight = container.offsetHeight;
 
-        const flowerImages = [pixelFlowers, pixelWhiteTulip];
+        const flowerImages = [
+            { image: pixelFlowers, size: { width: 60, height: 60 } },
+            { image: pixelWhiteTulip, size: { width: 35, height: 35 } },
+        ];
 
         for (let i = 0; i < count; i++) {
             const randomX = Math.floor(Math.random() * (containerWidth - 20));
             const randomY = Math.floor(Math.random() * (containerHeight - 20));
             const randomFlower = flowerImages[Math.floor(Math.random() * flowerImages.length)];
-            flowers.push({ id: i, x: randomX, y: randomY, image: randomFlower });
+            flowers.push({ id: i, x: randomX, y: randomY, image: randomFlower.image, size: randomFlower.size });
         }
         setRandomFlowers(flowers);
     };
@@ -113,8 +116,8 @@ function SquareCom() {
                                 position: 'absolute',
                                 left: `${flower.x}px`,
                                 top: `${flower.y}px`,
-                                width: '60px',
-                                height: '60px'
+                                width: `${flower.size.width}px`,
+                                height: `${flower.size.height}px`
                              }}
                         />
                     ))}
