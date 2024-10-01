@@ -100,7 +100,7 @@ function SquareCom() {
 
     useEffect(() => {
         generateRandomFlowers(20);
-        generateRandomGrass(50);
+        generateRandomGrass(70);
     }, []);
 
     useEffect(() => {
