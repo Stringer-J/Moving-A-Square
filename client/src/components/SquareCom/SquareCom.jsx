@@ -3,12 +3,14 @@ import './SquareCom.css';
 import pixelSquare from '../../assets/PixelSquare.png';
 import pixelFlowers from '../../assets/PixelFlowers.png';
 import pixelWhiteTulip from '../../assets/PixelWhiteTulip.png';
+import pixelGrassTuft from '../../assets/PixelGrassTuft.png';
 
 function SquareCom() {
     const [squareHPosition, setSquareHPosition] = useState(0);
     const [squareVPosition, setSquareVPosition] = useState(0);
     const [intervalId, setIntervalId] = useState(null);
     const [randomFlowers, setRandomFlowers] = useState([]);
+    const [randomGrass, setRandomGrass] = useState([]);
 
     const moveSquare = (dx, dy) => {
         setSquareHPosition((prevPosition) => {
@@ -82,8 +84,23 @@ function SquareCom() {
         setRandomFlowers(flowers);
     };
 
+    const generateRandomGrass = (count) => {
+        const grass = [];
+        const container = document.querySelector('.insideSquareBox');
+        const containerWidth = container.offsetWidth;
+        const containerHeight = container.offsetHeight;
+
+        for (let i = 0; i < count; i++) {
+            const randomX = Math.floor(Math.random() * (containerWidth - 20));
+            const randomY = Math.floor(Math.random() * (containerHeight - 20));
+            grass.push({ id: i, x: randomX, y: randomY, image: randomGrass });
+        }
+        setRandomGrass(grass);
+    };
+
     useEffect(() => {
         generateRandomFlowers(20);
+        generateRandomGrass(50);
     }, []);
 
     useEffect(() => {
@@ -102,6 +119,7 @@ function SquareCom() {
     return (
         <>
             <div className='squareBox'>
+                <button className='controlButton tiny5-regular'>CONTROLS</button>
                 <div className='insideSquareBox'>
                     <img id='moveSquare'
                          src={pixelSquare}
@@ -118,6 +136,20 @@ function SquareCom() {
                                 top: `${flower.y}px`,
                                 width: `${flower.size.width}px`,
                                 height: `${flower.size.height}px`
+                             }}
+                        />
+
+                    ))}
+                    {randomGrass.map(grass => (
+                        <img key={grass.id}
+                             src={pixelGrassTuft}
+                             alt='Grass Tuft'
+                             style={{
+                                position: 'absolute',
+                                left: `${grass.x}px`,
+                                top: `${grass.y}px`,
+                                width: '20px',
+                                height: '20px'
                              }}
                         />
                     ))}

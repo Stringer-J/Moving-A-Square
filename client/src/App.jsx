@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import pixelSquare from './assets/PixelSquare.png';
 import pixelBook from './assets/PixelBook.png';
@@ -7,6 +7,7 @@ import pixelUpArrow from './assets/PixelUpArrow.png';
 import StartCom from './components/StartCom/StartCom.jsx';
 import InfoCom from './components/InfoCom/InfoCom.jsx';
 import SquareCom from './components/SquareCom/SquareCom.jsx';
+import JumpCom from './components/JumpCom/JumpCom.jsx';
 
 function App() {
   const [selectedFromSideBar, setSelectedFromSideBar] = useState(null);
@@ -21,6 +22,8 @@ function App() {
         return selectedFromSideBar === 'InfoCom' ? 'activeButtonInfo' : 'inactiveButtonInfo';
       case 'SquareCom':
         return selectedFromSideBar === 'SquareCom' ? 'activeButtonSquare' : 'inactiveButtonSquare';
+      case 'JumpCom':
+        return selectedFromSideBar === 'JumpCom' ? 'activeButtonJump' : 'inactiveButtonJump';
     }
   };
 
@@ -30,10 +33,50 @@ function App() {
         return <InfoCom />;
       case 'SquareCom':
         return <SquareCom />;
+      case 'JumpCom':
+        return <JumpCom />;
       default:
         return <StartCom />;
     }
   };
+
+  useEffect(() => {
+    const pressedClasses = ['inactiveButtonInfo',
+                            'inactiveButtonInfo:hover',
+                            'activeButtonInfo',
+                            'inactiveButtonSquare',
+                            'inactiveButtonSquare:hover',
+                            'activeButtonSquare',
+                            'inactiveButtonJump',
+                            'inactiveButtonJump:hover',
+                            'activeButtonJump',
+                            'controlButton',
+                            'controlButton:hover'];
+
+    const handleMouseDown = (e) => {
+      document.body.classList.add('pressed');
+      const target = e.target;
+      if (pressedClasses.some(className => target.classList.contains(className))) {
+        target.classList.add('pressed');
+      }
+    };
+
+    const handleMouseUp = (e) => {
+      document.body.classList.remove('pressed');
+      const target = e.target;
+      if (pressedClasses.some(className => target.classList.contains(className))) {
+        target.classList.remove('pressed');
+      }
+    };
+
+    window.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mouseup', handleMouseUp);
+
+    return () => {
+      window.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, []);
 
   return (
     <>
@@ -55,7 +98,8 @@ function App() {
               MOVE
               <img src={pixelShoe} alt='Pixel Shoe' />
             </button>
-            <button className='inactiveButtonJump tiny5-regular'>
+            <button className={`${getButtonClass('JumpCom')} tiny5-regular`}
+                    onClick={() => handleSideBarClick('JumpCom')}>
               JUMP
               <img src={pixelUpArrow} alt='Pixel Up Arrow' />
             </button>

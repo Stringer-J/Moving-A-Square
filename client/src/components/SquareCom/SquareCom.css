@@ -5,6 +5,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .insideSquareBox {
@@ -21,4 +22,26 @@
     position: absolute;
     left: 0;
     z-index: 1;
+}
+
+.controlButton {
+    position: absolute; /* Make it absolute within the insideSquareBox */
+    top: 1%; /* Position it at the top */
+    left: 5%; /* Adjust left as needed */
+    z-index: 2; /* Ensure it's above other elements */
+    background-color: white; /* Optional background */
+    color: black; /* Optional text color */
+    border: none; /* Optional border */
+    cursor: pointer; /* Optional cursor style */
+    border-radius: 5px;
+    height: 3%;
+    width: 12%;
+    font-size: 15px;
+    cursor: url('../src/assets/PixelPointer3x.png'), auto;
+}
+
+.controlButton:hover {
+    color: white;
+    background-color: grey;
+    cursor: url('../src/assets/PixelPointer3x.png'), auto;
 }

@@ -1,0 +1,14 @@
+.jumpBox {
+    color: white;
+    background-color: black;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.insideJumpBox {
+    background-color: white;
+    width: 90%;
+    height: 90%;
+}
