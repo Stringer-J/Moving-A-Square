@@ -12,6 +12,8 @@
     background-color: white;
     width: 90%;
     height: 90%;
+    display: flex;
+    flex-direction: column;
 }
 
 .controlButton {
@@ -34,4 +36,22 @@
     color: white;
     background-color: grey;
     cursor: url('../src/assets/PixelPointer3x.png'), auto;
+}
+
+.sky {
+    background-color: skyblue;
+    height: 70%;
+}
+
+.ground {
+    background-color: sandybrown;
+    height: 30%;
+}
+
+#moveSquare {
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    left: 0;
+    z-index: 1;
 }
