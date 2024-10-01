@@ -75,7 +75,7 @@ html, body {
     height: 100%;
 }
 
-.inactiveButtonInfo, .inactiveButtonSquare {
+.inactiveButtonInfo, .inactiveButtonSquare, .inactiveButtonJump {
     background-color: white;
     border-radius: 0;
     cursor: pointer;
@@ -93,20 +93,20 @@ html, body {
     margin-bottom: 5%;
 }
 
-.inactiveButtonSquare img {
+.inactiveButtonSquare img, .inactiveButtonJump img {
     width: 30px;
     height: 30px;
     margin-bottom: .5%;
     margin-right: 4.45%;
 }
 
-.inactiveButtonInfo:hover, .inactiveButtonSquare:hover {
+.inactiveButtonInfo:hover, .inactiveButtonSquare:hover, .inactiveButtonJump:hover {
     color: white;
     background-color: rgba(0, 0, 0, 0.449);
     border: solid black;
 }
 
-.activeButtonInfo, .activeButtonSquare {
+.activeButtonInfo, .activeButtonSquare, .activeButtonJump {
     color: white;
     background-color: black;
     border: solid black;

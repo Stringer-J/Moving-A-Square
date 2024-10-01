@@ -2,6 +2,8 @@ import { useState } from 'react'
 import './App.css'
 import pixelSquare from './assets/PixelSquare.png';
 import pixelBook from './assets/PixelBook.png';
+import pixelShoe from './assets/PixelShoe.png';
+import pixelUpArrow from './assets/PixelUpArrow.png';
 import StartCom from './components/StartCom/StartCom.jsx';
 import InfoCom from './components/InfoCom/InfoCom.jsx';
 import SquareCom from './components/SquareCom/SquareCom.jsx';
@@ -51,7 +53,11 @@ function App() {
             <button className={`${getButtonClass('SquareCom')} tiny5-regular`}
                     onClick={() => handleSideBarClick('SquareCom')}>
               MOVE
-              <img src={pixelSquare} alt='Pixel Square' />
+              <img src={pixelShoe} alt='Pixel Shoe' />
+            </button>
+            <button className='inactiveButtonJump tiny5-regular'>
+              JUMP
+              <img src={pixelUpArrow} alt='Pixel Up Arrow' />
             </button>
           </div>
           <div className='mainContent'>
