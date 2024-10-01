@@ -8,7 +8,7 @@
 }
 
 .insideSquareBox {
-    background-color: white;
+    background-color: green;
     width: 90%;
     height: 90%;
     overflow: hidden;
@@ -20,4 +20,5 @@
     height: 50px;
     position: absolute;
     left: 0;
+    z-index: 1;
 }

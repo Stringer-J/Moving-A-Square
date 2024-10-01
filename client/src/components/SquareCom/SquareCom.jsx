@@ -1,11 +1,13 @@
 import { useEffect, useState, useCallback } from 'react';
 import './SquareCom.css';
 import pixelSquare from '../../assets/PixelSquare.png';
+import pixelFlowers from '../../assets/PixelFlowers.png';
 
 function SquareCom() {
     const [squareHPosition, setSquareHPosition] = useState(0);
     const [squareVPosition, setSquareVPosition] = useState(0);
     const [intervalId, setIntervalId] = useState(null);
+    const [randomFlowers, setRandomFlowers] = useState([]);
 
     const moveSquare = (dx, dy) => {
         setSquareHPosition((prevPosition) => {
@@ -59,6 +61,24 @@ function SquareCom() {
         }
     }, [intervalId]);
 
+    const generateRandomFlowers = (count) => {
+        const flowers = [];
+        const container = document.querySelector('.insideSquareBox');
+        const containerWidth = container.offsetWidth;
+        const containerHeight = container.offsetHeight;
+
+        for (let i = 0; i < count; i++) {
+            const randomX = Math.floor(Math.random() * (containerWidth - 20));
+            const randomY = Math.floor(Math.random() * (containerHeight - 20));
+            flowers.push({ id: i, x: randomX, y: randomY });
+        }
+        setRandomFlowers(flowers);
+    };
+
+    useEffect(() => {
+        generateRandomFlowers(30);
+    }, []);
+
     useEffect(() => {
         window.addEventListener('keydown', handleKeyDown);
         window.addEventListener('keyup', handleKeyUp);
@@ -81,6 +101,19 @@ function SquareCom() {
                          alt='Pixel Square'
                          style={{ transform: `translate(${squareHPosition}px, ${squareVPosition}px)`,
                                   transition: 'transform 0.1s ease'}} />
+                    {randomFlowers.map(flower => (
+                        <img key={flower.id}
+                             src={pixelFlowers}
+                             alt='Pixel Flower'
+                             style={{
+                                position: 'absolute',
+                                left: `${flower.x}px`,
+                                top: `${flower.y}px`,
+                                width: '60px',
+                                height: '60px'
+                             }}
+                        />
+                    ))}
                 </div>
             </div>
         </>

@@ -50,7 +50,7 @@ function App() {
             </button>
             <button className={`${getButtonClass('SquareCom')} tiny5-regular`}
                     onClick={() => handleSideBarClick('SquareCom')}>
-              SQUARE
+              MOVE
               <img src={pixelSquare} alt='Pixel Square' />
             </button>
           </div>
