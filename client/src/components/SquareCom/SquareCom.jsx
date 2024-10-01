@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useMovement } from '../Movement/MoveMovement.js';
 import './SquareCom.css';
 import pixelSquare from '../../assets/PixelSquare.png';
@@ -7,7 +7,8 @@ import pixelWhiteTulip from '../../assets/PixelWhiteTulip.png';
 import pixelGrassTuft from '../../assets/PixelGrassTuft.png';
 
 function SquareCom() {
-    const { squareHPosition, squareVPosition } = useMovement();
+    const containerRef = useRef(null);
+    const { squareHPosition, squareVPosition } = useMovement(containerRef);
     const [randomFlowers, setRandomFlowers] = useState([]);
     const [randomGrass, setRandomGrass] = useState([]);
 
@@ -54,12 +55,13 @@ function SquareCom() {
         <>
             <div className='squareBox'>
                 <button className='controlButton tiny5-regular'>CONTROLS</button>
-                <div className='insideSquareBox'>
+                <div className='insideSquareBox' ref={containerRef}>
                     <img id='moveSquare'
                          src={pixelSquare}
                          alt='Pixel Square'
                          style={{ transform: `translate(${squareHPosition}px, ${squareVPosition}px)`,
-                                  transition: 'transform 0.1s ease'}} />
+                                  transition: 'transform 0.1s ease'}} 
+                    />
                     {randomFlowers.map(flower => (
                         <img key={flower.id}
                              src={flower.image}

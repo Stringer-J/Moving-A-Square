@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 
-export const useMovement = () => {
+export const useMovement = (containerRef) => {
     const [squareHPosition, setSquareHPosition] = useState(0);
     const [squareVPosition, setSquareVPosition] = useState(0);
     const [intervalId, setIntervalId] = useState(null);
@@ -9,7 +9,7 @@ export const useMovement = () => {
         setSquareHPosition((prevPosition) => {
             const newPosition = prevPosition + dx;
             const squareWidth = 70;
-            const containerWidth = window.innerWidth;
+            const containerWidth = containerRef.current.offsetWidth;
 
             return (newPosition + squareWidth <= containerWidth && newPosition >= 0) ? newPosition : prevPosition;
         });
@@ -17,7 +17,7 @@ export const useMovement = () => {
         setSquareVPosition((prevPosition) => {
             const newPosition = prevPosition + dy;
             const squareHeight = 70;
-            const containerHeight = window.innerHeight;
+            const containerHeight = containerRef.current.offsetHeight;
 
             return (newPosition + squareHeight <= containerHeight && newPosition >= 0) ? newPosition : prevPosition;
         });

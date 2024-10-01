@@ -41,6 +41,7 @@
 .sky {
     background-color: skyblue;
     height: 70%;
+    position: relative;
 }
 
 .ground {
@@ -48,10 +49,11 @@
     height: 30%;
 }
 
-#moveSquare {
+#jumpSquare {
     width: 70px;
     height: 70px;
     position: absolute;
     left: 0;
+    bottom: 0;
     z-index: 1;
 }
