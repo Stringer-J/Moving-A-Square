@@ -36,6 +36,16 @@ export const useMovement = (containerRef) => {
             case 'ArrowLeft':
                 dx = -10;
                 break;
+            case ' ':
+                dy = -50;
+                setSquareVPosition((prevPosition) => {
+                    const newPosition = prevPosition + dy;
+                    setTimeout(() => {
+                        setSquareVPosition(prevPosition);
+                    }, 200);
+                    return newPosition;
+                });
+                return;
             default:
                 return;
         }
